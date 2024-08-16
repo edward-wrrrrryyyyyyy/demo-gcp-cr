@@ -1,4 +1,5 @@
 from flask import Flask
+import os
 
 app = Flask(__name__)
 
@@ -7,5 +8,6 @@ def hello_world():
     return 'Hello, World!'
 
 if __name__ == '__main__':
-    # 使用 0.0.0.0 將應用綁定到所有網絡介面，這對於 Docker 容器內的應用是必須的
-    app.run(host='0.0.0.0', port=8080)
+    # 从环境变量中获取 PORT 值，默认是 8080
+    port = int(os.environ.get('PORT', 8080))
+    app.run(host='0.0.0.0', port=port)
